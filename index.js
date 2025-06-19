@@ -1,12 +1,12 @@
-const cors = require("cors");
 require('dotenv').config();
 const express = require('express');
-const connectDB = require('./connect/database');
+const cors = require("cors");
 const app = express();
+const connectDB = require('./connect/database');
 const PORT = process.env.PORT || 3000;
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://airline-frontend.netlify.app",
   credentials: true,
 }));
 
