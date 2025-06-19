@@ -1,0 +1,3 @@
+﻿#,year,quarter,month,dayMonth,dayWeek,reportingAirline,flightNumber,airlineOriginCode,originStateCode,airlineDestCode,destStateCode,plannedDepTime,actualDepTime,plannedArrTime,actualArrTime
+21,2020,1,2,1,6,WN,3932,BOI,ID,SAN,CA,1625,1622,1735,1721
+22,2020,1,1,15,3,YX,6006,LGA,NY,MCI,MO,1440,1433,1722,1708
