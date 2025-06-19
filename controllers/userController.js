@@ -26,7 +26,7 @@ exports.registerUser = async (req, res) => {
   });
 };
 
-exports.loginUser = async (req, res) => {
+/*exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log("Login attempt for email:", email);
@@ -60,37 +60,22 @@ exports.loginUser = async (req, res) => {
     console.error("Login error:", err);
     res.status(500).json({ message: "Internal server error", error: err.message });
   }
-};
-// Login an existing user
-/*exports.loginUser = async (req, res) => {
+};*/
+
+exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email }).select('+password');
 
-    if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
+    console.log("Login attempt for:", email, password);
+
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password required" });
     }
 
-    const isMatch = await user.matchPassword(password);
-    if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      token: generateToken(user._id),
-    });
-  } catch (err) {
-    console.error("Login error:", err);
-    res.status(500).json({ message: "Internal server error", error: err.message });
-  }
-};
+    const user = await User.findOne({ email });
 
     if (user && (await user.matchPassword(password))) {
-      res.json({
+      return res.status(200).json({
         _id: user._id,
         name: user.name,
         email: user.email,
@@ -98,13 +83,13 @@ exports.loginUser = async (req, res) => {
         token: generateToken(user._id),
       });
     } else {
-      res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
   } catch (err) {
     console.error("Login error:", err);
-    res.status(500).json({ message: "Internal server error", error: err.message });
+    return res.status(500).json({ message: "Internal server error" });
   }
-};*/
+};
 
 // Get a user by ID (admin only)
 exports.getUserById = async (req, res) => {
